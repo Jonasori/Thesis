@@ -1,0 +1,227 @@
+%-----------------------------------------------------------------------------------------------------------------------------------------
+% PACKAGES
+%Document Class starts every LaTeX document.  In this case, we're declaring the document class to be a book.  Changing "oneside" to "twoside" changes where the page numbers and headers and such get placed.
+\documentclass[12pt,oneside]{book}
+
+%These are the packages I used.  There's a description of (most of) them below (that Arthur wrote):
+\usepackage{fancyhdr, geometry, graphicx, epstopdf, lscape, setspace, amssymb, amsmath, wasysym,moreverb, titlesec, longtable, multirow, alltt,here, indentfirst,ifthen,rotating,bm, afterpage}
+\usepackage{hyperref,natbib}
+\usepackage[section]{placeins}
+\usepackage[flushleft]{threeparttable}
+%\usepackage[small,bf]{caption}
+
+%\PassOptionsToPackage{square,numbers}{natbib}
+%\RequirePackage{natbib}
+
+%where the diagrams are saved
+\graphicspath{ {Diagrams/} }
+
+\usepackage[section]{placeins}
+\usepackage[small,bf]{caption}
+\geometry{letterpaper}
+
+
+%The "raggedbottom" command allows LaTeX to take some liberty with where the text on a page ends. This saved me some weird formatting problems I was having.
+\raggedbottom
+
+%set the pagestyle:
+\fancypagestyle{plain}{
+\fancyhf{} % clear all header and footer fields, we will re-format them later
+
+
+%Some formatting stuff:
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+
+% journal defs
+\newcommand{\aap}{{\it A\&A}}
+\newcommand{\aaps}{{\it A\&AS}}
+\newcommand{\aj}{{\it AJ}}
+\newcommand{\apj}{{\it ApJ}}
+\newcommand{\apjl}{{\it ApJL}}
+\newcommand{\apjs}{{\it ApJS}}
+\newcommand{\araa}{{\it ARA\&A}}
+\newcommand{\iaucirc}{{\it IAU Circular}}
+\newcommand{\mnras}{{\it MNRAS}}
+\newcommand{\nat}{{\it Nature}}
+\newcommand{\pasj}{{\it PASJ}}
+\newcommand{\pasp}{{\it PASP}}
+\newcommand{\ssr}{{\it SSRv}}
+\newcommand{\sciam}{{\it Scientific American}}
+\newcommand{\jgr}{{\it JGR}}
+\newcommand{\grl}{{\it GRL}}
+\newcommand{\icarus}{{\it ICAR}}
+\newcommand{\na}{{\it NA}}
+\newcommand{\actaa}{{\it ACA}}
+\newcommand{\apss}{{\it Ap\&SS}}
+\newcommand{\kms}{{km s$^{-1}~$}}
+\def\chapterautorefname{Chapter}%
+\def\sectionautorefname{Section}%
+
+%name of the space missions
+
+
+\newcommand{\tess}{\textit{TESS~}}
+\newcommand{\kepler}{\textit{Kepler~}}
+\newcommand{\ketu}{\textit{K2~}}
+\newcommand{\jwst}{\textit{JWST~}}
+\newcommand{\spitzer}{\textit{Spitzer~}}
+\newcommand{\gaia}{\textit{Gaia~}}
+
+
+
+%-----------------------------------------------------------------------------------------------------------------------------------------
+% RULES
+
+%This has something to do with headers and margins and stuff:
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+\textwidth 5.750in \textheight=8.50in \headheight 0.0625in \topmargin 0.0in % book strict
+
+%==============================================================================
+% Uncomment below for one sided printing (margins the same on even and odd pages)
+\oddsidemargin 0.500in \evensidemargin 0.500in
+
+% Uncomment below for two sided printing (margins different on even and odd pages)
+%\oddsidemargin 0.563in \evensidemargin 0.2500in
+
+%This sets how we want the formatting of chapter titles to look (bold face and Huge):
+\titleformat{\chapter}{\bf\Huge}
+{Chapter \thechapter}{-4.4em}{\\}
+\titlespacing*{\chapter}{0pt}{-.57in}{*3}
+
+%This formats the section headings:
+
+
+\titleformat{\section}{\bf\Large}
+{\thesection}{1em}{}
+\titlespacing*{\section}{0pt}{*2}{*2}
+
+%Let's double-space the document:
+\doublespacing
+
+%And our citation style will be aa (astronomy style):
+\citestyle{aa}
+
+%-----------------------------------------------------------------------------------------------------------------------------------------
+% DOCUMENT/ TITLE PAGE
+%Now the document actually begins:
+\begin{document}
+
+%This states that this is the stuff that comes before the real text:
+\frontmatter
+
+%Here goes the title page:
+\pagestyle{empty}
+\begin{titlepage}
+\begin{center}
+\rule{5.75in}{1pt} \\
+\vspace*{-0.125in}
+{\large Wesleyan University}
+\rule[0.2in]{5.75in}{1pt} \\
+
+
+\vspace*{0.8in}
+{\LARGE \singlespacing \bf Big Disk Energy} \\
+\vspace*{0.05in}
+\vspace*{0.10in}
+{\large \vspace*{0.20in}  \singlespacing by \vspace*{.2in}
+\\Jonas Powell \\ Class of 2019\\}
+\vspace*{0.25in}
+\vspace*{0.8in}
+{\large \singlespacing A thesis submitted to the\\ faculty of Wesleyan University\\ in partial fulfillment of the requirements for the \\ Degree of Master of Arts\\  \vspace*{-0.15in} }
+\vspace*{.25in}
+\rule{5.75in}{1pt} \\
+\vspace*{-0.125in}
+{\large \doublespacing Middletown, Connecticut \hfill April, 2018}
+\rule[0.2in]{5.75in}{1pt} \\
+\end{center}
+\end{titlepage}
+
+
+\pagebreak
+
+
+\pagestyle{empty}
+\include{00_Epigraph}
+\include{00_Acknowledgement}
+
+
+\tableofcontents
+
+
+\titleformat{\chapter}{\bf\Huge}
+{Chapter \thechapter}{-4.4em}{\\}
+\titlespacing*{\chapter}{0pt}{*2}{*3}
+
+\titleformat{\section}{\bf\Large}
+{\thesection}{1em}{}
+\titlespacing*{\section}{0pt}{*2}{*2}
+
+
+
+%You can also put in the following, if you wish:
+%\listoffigures
+%\listoftables \pagestyle{empty}
+
+
+
+\mainmatter
+
+
+
+%-----------------------------------------------------------------------------------------------------------------------------------------
+% HEADERS
+%This took me forever to figure out properly, and you may want to change it.  There's also different thing you can do if you want doublesided printing.  Your final thesis, as published by the University, is one-sided.
+
+
+\renewcommand{\chaptermark}[1]{ \markboth{\sc\thechapter.\ #1}{}}
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+
+%==============================================================================
+%Number your pages!
+\pagenumbering{arabic}
+
+%\pagestyle{empty}
+\include{01_Introduction}
+\include{02_K2Reduction}
+\include{03_GJ9827}
+\include{04_PhaseCurve}
+\include{05_Conclusion}
+%\appendix
+%-----------------------------------------------------------------------------------------------------------------------------------------
+%%BIBLIOGRAPHY:
+\fancypagestyle{plain}{%
+% clear all header and footer fields, we don't want these for the bibliography
+\fancyhf{}
+% except we want the page number to show up in the center of the footer:
+\fancyfoot[C]{\thepage}
+
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+\pagestyle{plain}
+
+%change title spacing once again, for the bibliography:
+\titlespacing*{\chapter}{0pt}{-.75in}{*3}
+
+%Add the bibliograph
+\addcontentsline{toc}{chapter}{\textbf {Bibliography}}
+
+%The default for BibTex (the bibliography builder in LaTeX) is to not include citations that are in your bibliography file, but that you don't cite anywhere in the paper.  This changes that setting, so that all papers show up in the bibliography, whether or not you referenced them:
+\nocite{*}
+
+%Insert the bibliography (in this case, my file name was also "bibliography" if not, your line would read:\bibliography{my_workscited_filename} or whatever:
+\bibliographystyle{apj}
+\bibliography{References}
+%\printbibliography
+
+%the end!
+\end{document}
+
+
+\end{document}
