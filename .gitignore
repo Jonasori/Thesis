@@ -1,2 +1,12 @@
 *.aux
 *.fls
+*.log
+*.tex
+*.fdb_latexmk
+*.synctex.gz
+*.blg
+*.bbl
+push_commit.py
+sample*
+blah*
+.DS_Store

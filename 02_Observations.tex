@@ -1,48 +1,44 @@
-\chapter{Data Reduction}
-\label{chap:datareduction}
+\chapter{Observations}
+\label{chap:observations}
 
-% Ex reference: \citep{howell2014}
+The data presented in this thesis are part of an ALMA survey of Orion proplyds in Orion (project 2011.0.00028.S) (citation); data collection and analysis methods of the continuum results are presented in Mann et al. (2014) (citation). Since this was part of a Cycle 0 Early Science project, the survey used only 22 of the array's 12 meter dishes in a hybrid configuration, with baselines ranging from 21.2 to 384.2 meters, yielding maximum angular scales and angular resolution of 8" and 0."5, respectively. At a distance of 389 pc for the distance to these sources, max angular scales and angular resolution become (convert to distances at 389 pc). This distance to the stars was recently measured by GAIA (citation) to be 389 +- 1, closer than the previous measurement of 414 pc.
 
-\iffalse
-Not sure what 'afterpage' is:
 
-\afterpage{
-\pagestyle{empty}
-\begin{landscape}
-\begin{figure}[ht!]
-\centering
-\includegraphics[height=0.8\textheight]{K2Field.pdf}
-\caption{\label{fig:k2field} Different K2 fields of observation in galactic coordinates up to Campaign 18 are shown. \ketu observed different parts of the ecliptic planet with field overlapping between subsequent campaigns. Note that Campaign 5 and Campaign 18 fields overlap perfectly.}
+Observations were made in Band 7 in four 1.875 GHz-wide bands arranged to cover the rest frequencies of the HCO+ (4-3), HCN (4-3), CO (3-2), and CS (7-6) transitions (356.734 GHz, 354.505 GHz, 345.796 GHz, and 342.883 GHz, respectively). Each band was split into 3840 channels with width 488.28 kHz, yielding a velocity resolution of 0.42 km s$^{-1}$.
+
+
+
+Analysis showed that excluding baselines shorter than 110 $k \lambda$, 80 $k \lambda$, and 60 $k \lambda$ for HCO+, HCN, and CO respectively optimized signal-to-noise ratios for each data set. The CS line showed no improvement with baseline cutting. These cuts resulted in decreased maximum recoverable angular scales of 1, 2, and 3.
+
+\begin{figure}
+  \centering
+  \includegraphics[height=0.8\textheight]{Noise-analysis.pdf}
+  \caption{blah}
 \end{figure}
-\end{landscape}
-\clearpage}
-\fi
 
-\section{Reduction Strategies}
-
-% Ex footnote: \texttt{K2Phot}\footnote{\href{https://github.com/vincentvaneylen/k2photometry}{https://github.com/vincentvaneylen/k2photometry}} \citep{vaneylen2016}
-
-\section{Reduction Pipeline}
-% Ex something: \autoref{fig:Arc_Flux}
-
-
-
-\subsection{Aperture}
-% Another autoref. Maybe to a section? \autoref{sec:serendipitous_target}
-% Another autoref, to a chapter. \autoref{chap:GJ9827}.
-
-
-% What's the diff between citet, citep: \citet{white2017}, \citep{rizzuto2017}
+The data presented here, from Field 4 of Mann et al (2014) (citation) represent 13.6 minutes of on-source time. This duration was split into six 136 second observations, spaced out over 7.5 hours to ensure adequate \textit{uv} coverage, resulting in a synthesized beam of 0."57 $\cross$ 0."51 with a position angle of PA. Precipitable water vapor in the atmosphere was stable at 0.7 mm.
 
 
 
 
-\section{Planetary Signal Search}
+The data were calibrated by ALMA staff using standard procedures in the Common Astronomy Software Applications (CASA, citation). The antenna-based complex gains and bandpass response of the system were calibrated using observations of the quasars J0607-085 and J0522-364 respectively. The ab- solute flux calibration was determined from observations of Callisto. The model of Callisto was drawn from Butler (2012) (citation). Absolute flux calibration is estimated to be accurate to within ∼ 10\% (Mann et al. 2014).
+
+The velocity reference frame was converted from CASA's standard topocentric frame to LSRK (kinematic local standard of rest) using the CASA task cvel. Next, continuum emission was subtracted in the uv plane using the CASA task contsub. Visibilities were then inverted with natural weighting, deconvolved, and restored using standard procedures from the Multichannel Image Reconstruction Image Analysis and Display, or MIRIAD, package (Sault et al. 1995) (citation)
 
 
-\iffalse
-%paragraph summarizing everything
-Detrending algorithms with \textit{K2} are getting better with time, and the planet recovery rate are getting higher. It would be interesting to see how \textit{K2} compares with \textit{Kepler}. Understanding how different detrending algorithm fares, and what are the good setup for the knobs for each algorithm is something we will learn with time, and this can be seen as better quality of light curves are being extracted for later campaigns compared to earlier. The data challenges with \textit{K2} has helped in creating a host of new tools and techniques, whose utility is not likely to be limited to astronomy.
-\fi
+
+
+
+
+
+
+
+Things to get:
+* noise profiles as func of baseline
+* 8", 0".5 -> AU at 389 pc
+* Noise levels
+* Beam size, max angular scales after baseline cuts
+* Beam position angle
+* Does ICR use natural weighting? (using robust=2)
 
 % Note that no closing info is needed.
