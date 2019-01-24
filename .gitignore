@@ -10,4 +10,4 @@ sample*
 blah*
 .DS_Store
 push_commit.py
-
+.gitignore
