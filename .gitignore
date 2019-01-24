@@ -6,7 +6,6 @@
 *.synctex.gz
 *.blg
 *.bbl
-push_commit.py
 sample*
 blah*
 .DS_Store
