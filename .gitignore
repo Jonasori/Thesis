@@ -6,8 +6,10 @@
 *.synctex.gz
 *.blg
 *.bbl
+*.toc
+*.out
 sample*
 blah*
 .DS_Store
 push_commit.py
-.gitignore
+
