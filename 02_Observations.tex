@@ -1,14 +1,15 @@
 \chapter{Observations}
 \label{chap:observations}
 
-The data presented in this thesis are part of an ALMA survey of Orion proplyds in Orion (project 2011.0.00028.S) (citation); data collection and analysis methods of the continuum results are presented in Mann et al. (2014) (citation). Since this was part of a Cycle 0 Early Science project, the survey used only 22 of the array's 12 meter dishes in a hybrid configuration, with baselines ranging from 21.2 to 384.2 meters, yielding maximum angular scales and angular resolution of 8" and 0."5, respectively. At a distance of 389 pc for the distance to these sources, max angular scales and angular resolution become (convert to distances at 389 pc). This distance to the stars was recently measured by GAIA (citation) to be 389 +- 1, closer than the previous measurement of 414 pc.
-
+The data presented in this thesis are part of an ALMA survey of Orion proplyds in Orion (project 2011.0.00028.S); data collection and analysis methods of the continuum results are presented in \citep{mann_alma_2014}. Since this was part of a Cycle 0 Early Science project, the survey used only 22 of the array's 12 meter dishes in a hybrid configuration, with baselines ranging from 21.2 to 384.2 meters, yielding maximum angular scales and angular resolution of 8" and 0."5, respectively. At a distance of 389 pc for the distance to these sources, max angular scales and angular resolution correspond to 3,112 AU and 194 AU, respectively. The distance to the stars used here was recently measured by GAIA (\citep{gaia_collaboration_gaia_2016}, \citep{gaia_collaboration_gaia_2018}) to be 389 \pm 7.97, nearer than the previous measurement of 414 pc.
+% sig figs on the distance
+% For Gaia references: https://gea.esac.esa.int/archive/documentation/GDR2/bib.html#bib173
 
 Observations were made in Band 7 in four 1.875 GHz-wide bands arranged to cover the rest frequencies of the HCO+ (4-3), HCN (4-3), CO (3-2), and CS (7-6) transitions (356.734 GHz, 354.505 GHz, 345.796 GHz, and 342.883 GHz, respectively). Each band was split into 3840 channels with width 488.28 kHz, yielding a velocity resolution of 0.42 km s$^{-1}$.
 
 
 
-Analysis showed that excluding baselines shorter than 110 $k \lambda$, 80 $k \lambda$, and 60 $k \lambda$ for HCO+, HCN, and CO respectively optimized signal-to-noise ratios for each data set. The CS line showed no improvement with baseline cutting. These cuts resulted in decreased maximum recoverable angular scales of 1, 2, and 3.
+Analysis showed that excluding baselines shorter than 110 k$\lambda$, 80 k$\lambda$, and 60 k$\lambda$ for HCO$^{+1}$, HCN, and CO respectively optimized signal-to-noise ratios for each data set. The CS line showed no improvement with baseline cutting. These cuts resulted in decreased maximum recoverable angular scales of 1, 2, and 3.
 
 \begin{figure}
   \centering
@@ -32,13 +33,12 @@ The velocity reference frame was converted from CASA's standard topocentric fram
 
 
 
-
+\iffalse
 Things to get:
 * noise profiles as func of baseline
-* 8", 0".5 -> AU at 389 pc
 * Noise levels
-* Beam size, max angular scales after baseline cuts
+* Beam size, max angular scales after baseline cuts (how to get that?)
 * Beam position angle
 * Does ICR use natural weighting? (using robust=2)
-
+\fi
 % Note that no closing info is needed.
