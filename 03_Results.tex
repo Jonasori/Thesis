@@ -5,30 +5,67 @@
 % Ex footnote: \texttt{K2Phot}\footnote{\href{https://github.com/vincentvaneylen/k2photometry}{https://github.com/vincentvaneylen/k2photometry}} \citep{vaneylen2016}
 
 
-Spatially and spectrally resolved line emission was detected for CO (3-2), HCO$^{+}$ (4-3), HCN (4-3), and CS (7-6) across around 50 channels of width 0.42 km s$^{-1}$. Detailed studies of gas structure in protoplanetary disks are still relatively rare, and have previously only focused on disks in nearby low-mass star-forming regions (SFRs). Consequently, it would be useful to develop a rough understanding of the observations before beginning detailed modeling. This includes removing cloud contamination, investigating the general morphology of the disks using moment maps, estimating the disks' gas masses using integrated line flux, and examining the velocity profile to estimate the mass of the central star (really?).
+Spatially and spectrally resolved line emission was detected for CO (3-2), HCO$^{+}$ (4-3), HCN (4-3), and CS (7-6) across around 50 channels of width 0.42 km s$^{-1}$. Before beginning modeling processes, it is useful to the data as the are. This process includes removing cloud contamination, investigating the general morphology of the disks using moment maps, estimating the disks' gas masses using integrated line flux, and examining the velocity profile to estimate the mass of the central star (really?).
 
-Cloud contamination occurs when emission from background or foreground gas clouds is detected in the same direction as the disk being observed. Since the Orion Nebula has a higher gas density than in low-mass SFRs, cloud contamination is more much common and problematic. "Previous observations of these disks by Mann & Williams (2009) (citation) (do I have these?) strongly detected the CO (3-2 line)". Thanks to the higher sensitivity of the ALMA observations, etc.
+Cloud contamination occurs when emission from background or foreground gas clouds is detected in the same direction as the disk being observed. Since the Orion Nebula has a higher gas density than low-mass SFRs, cloud contamination is more much common and problematic. "Previous observations of these disks by Mann & Williams (2009) (citation) (do I have these?) strongly detected the CO (3-2 line)". Thanks to the higher sensitivity of the ALMA observations, etc.
 
-CO displayed the most significant cloud contamination, thanks to its low critical density and higher abundance in the clouds. For the other molecular lines, which have higher critical densities, cloud contamination is less severe but still clearly present in HCO$^{+}$, which is the brightest tracer.
+HCO$^+$ displayed the most significant cloud contamination, thanks to its low critical density and higher abundance in the clouds. For the other molecular lines, which have higher critical densities, cloud contamination is less severe but still clearly present in HCO$^{+}$, which is the brightest tracer.
 
-Since cloud contamination inherently tends to be large-scale in structure, excluding short baselines reduces its contribution to the observations. While this process slightly reduces the total recovered flux from the disk and our ability to characterize its large-scale strucutre, it is necessary to avoid including cloud emission from the cloud in the process of fitting the disk emission. By evaluating mean and RMS noise for an off-source region of the field while varying the minimum baseline used, we found that excluding baselines less than 110 k$\lambda$, 80 k$\lambda$, and 60  k$\lambda$ for HCO$^{+}$, HCN, and CO, respectively, yielded optimum results. Since the CS line already has a very low SNR and a higher critical density, excluding baselines did not improve the observations.
-
-
+Since cloud contamination inherently tends to be large-scale in structure, excluding short baselines reduces its contribution to the observations. While this process slightly reduces the total recovered flux from the disk and our ability to characterize its large-scale structure, it is necessary to avoid including cloud emission from the cloud in the process of fitting the disk emission. By evaluating mean and RMS noise for an off-source region of the field while varying the minimum baseline used, we found that excluding baselines less than 110 k$\lambda$, 80 k$\lambda$, and 60  k$\lambda$ for HCO$^{+}$, HCN, and CO, respectively, yielded optimum results. Since the CS line already has a very low SNR and a higher critical density, excluding baselines did not improve the observations.
 
 
+% Maybe put an image of HCO+ before and after the cuts here?
+\begin{figure}
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.6\linewidth]{hcn-imnoise_hcn10000.png}
+  \captionof{figure}{First moment map of HCO+, with and without (below and above, respectively) baseline cuts.}
+  \label{fig:test1}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.6\linewidth]{hcn-imnoise_hcn10000.png}
+  \captionof{figure}{First moment map of HCN, with and without (below and above, respectively) baseline cuts.}
+  \label{fig:test2}
+\end{minipage}
+\end{figure}
 
-Table 1: Integrated Flux Measurements
-Line       | Baselines                   | Max Angular Scale | Integrated Line Flux (Jy km s$^{-1}$)
-CS (7-6)    All
-CO (3-2)    All
-CO (3-2)    \textgreater 60 k$\lambda$
-HCN (4-3)   All
-HCN (4-3)   \textgreater 80 k$\lambda$
-HCO$^{+}$   All
-HCO$^{+}$   \textgreater 110 k$\lambda$
+\iffalse
+\bigskip
+\begin{tabular}{l*{6}{c}r}
+  Line                       & HCO$^{+}$ & HCN    & CO    & CS  \\
+  \hline
+  Min Baseline (k$\lambda$)  &  110      & 80     & 60    & 24.23 (None excluded) \\
+  Largest Angular Scale (")  &  1.87     & 2.57   & 3.44  & 8.12 \\
+  Angular Resolution (")     &  0.45     & 0.45  & 0.47   & 0.47 \\
+\end{tabular}
+
+\bigskip
+\bigskip
+\fi
 
 
-Figure 1:
+\bigskip
+\bigskip
+\textbf{probably don't need angular res here}
+\begin{tabular}{l*{6}{c}r}
+  Line       & \shortstack{Baselines \\ (")} & \shortstack{Max Angular Scale \\ (")} & Angular Resolution & \shortstack{Integrated Line Flux \\ (Jy km s$^{-1}$)} \\
+  \hline
+  \hline
+  CS (7-6)         & All                            & 8."5 & 0."47 \\
+  CO (3-2)         & All                            & 8."4 & 0."47 \\
+  CO (3-2)         & \textgreater 60 k$\lambda$     & 3."4 & 0."47 \\
+  HCN (4-3)        & All                            & 8."2 & 0."45 \\
+  HCN (4-3)        & \textgreater 80 k$\lambda$     & 2."6 & 0."45 \\
+  HCO$^{+}$ (4-3)  & All                            & 8."2 & 0."45 \\
+  HCO$^{+}$ (4-3)  & \textgreater 110 k$\lambda$    & 1."9 & 0."45 \\
+  \hline
+\end{tabular}
+\caption{Table 1: Integrated Flux Measurements}
+\bigskip
+\bigskip
+
 
 \begin{figure}
   \centering
