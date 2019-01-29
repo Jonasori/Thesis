@@ -1,35 +1,45 @@
 \chapter{Observations}
 \label{chap:observations}
 
-The data presented in this thesis are part of an ALMA survey of Orion proplyds in Orion (project 2011.0.00028.S); data collection and analysis methods of the continuum results are presented in \citep{mann_alma_2014}. Since this was part of a Cycle 0 Early Science project, the survey used only 22 of the array's 12 meter dishes in a hybrid configuration, with baselines ranging from 21.2 to 384.2 meters, yielding maximum angular scales and angular resolution of 8" and 0."5, respectively. At a distance of 389 pc for the distance to these sources, max angular scales and angular resolution correspond to 3,112 AU and 194 AU, respectively. The distance to the stars used here was recently measured by GAIA (\citep{gaia_collaboration_gaia_2016}, \citep{gaia_collaboration_gaia_2018}) to be 389 \pm 7.97, nearer than the previous measurement of 414 pc.
+The data presented in this thesis are part of an ALMA survey of Orion proplyds in Orion (project 2011.0.00028.S); data collection and analysis methods of the continuum results are presented in \citet{mann_alma_2014}. Since this was part of a Cycle 0 Early Science project, the survey used only 22 of the array's 12 meter dishes in a hybrid configuration, with baselines ranging from 21.2 to 384.2 meters, yielding maximum angular scales and angular resolution of 8" and 0."5, respectively. At a distance of 389 pc, max angular scales and angular resolution correspond to 3,112 AU and 194 AU, respectively. The distance to the stars used here was recently measured by Gaia (\citet{gaia_collaboration_gaia_2016}, \citet{gaia_collaboration_gaia_2018}) to be 389 $\pm$ 7.97, nearer than the previous measurement of 414 pc.
 % sig figs on the distance
 % For Gaia references: https://gea.esac.esa.int/archive/documentation/GDR2/bib.html#bib173
+\bigskip
 
 Observations were made in Band 7 in four 1.875 GHz-wide bands arranged to cover the rest frequencies of the HCO+ (4-3), HCN (4-3), CO (3-2), and CS (7-6) transitions (356.734 GHz, 354.505 GHz, 345.796 GHz, and 342.883 GHz, respectively). Each band was split into 3840 channels with width 488.28 kHz, yielding a velocity resolution of 0.42 km s$^{-1}$.
 
+\bigskip
 
 
-Analysis showed that excluding baselines shorter than 110 k$\lambda$, 80 k$\lambda$, and 60 k$\lambda$ for HCO$^{+1}$, HCN, and CO respectively optimized signal-to-noise ratios for each data set. The CS line showed no improvement with baseline cutting. These cuts resulted in decreased maximum recoverable angular scales of 1, 2, and 3.
 
 % Maybe put an image of HCO+ before and after the cuts here?
 \begin{figure}
 \centering
 \begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=.4\linewidth]{hcn-imnoise_hcn10000.png}
-  \captionof{figure}{A figure}
+  \includegraphics[width=.6\linewidth]{hcn-imnoise_hcn10000.png}
+  \captionof{figure}{First moment map of HCO+, with and without (below and above, respectively) baseline cuts.}
   \label{fig:test1}
 \end{minipage}%
 \begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=.4\linewidth]{hcn-imnoise_hcn10000.png}
-  \captionof{figure}{Another figure}
+  \includegraphics[width=.6\linewidth]{hcn-imnoise_hcn10000.png}
+  \captionof{figure}{First moment map of HCN, with and without (below and above, respectively) baseline cuts.}
   \label{fig:test2}
 \end{minipage}
 \end{figure}
 
-These data, from Field 4 of Mann et al (2014) (citation) represent 13.6 minutes of on-source time. This duration was split into six 136 second observations, spaced out over 7.5 hours to ensure adequate \textit{uv} coverage, resulting in a synthesized beam of 0."57 $\cross$ 0."51 with a position angle of PA. Precipitable water vapor in the atmosphere was stable at 0.7 mm.
 
+
+
+Analysis showed that excluding baselines shorter than 110 k$\lambda$, 80 k$\lambda$, and 60 k$\lambda$ for HCO$^{+}$, HCN, and CO respectively optimized signal-to-noise ratios for each data set. The CS line showed no improvement with baseline cutting. These cuts resulted in decreased maximum recoverable angular scales of 1.5, 2.2, and 3, respectively.
+
+These data, from Field 4 of Mann et al (2014) (citation) represent 13.6 minutes of on-source time. This duration was split into six 136 second observations, spaced out over 7.5 hours to ensure adequate \textit{uv} coverage. With the esulting in a synthesized beam of 0."57$\times$0."51 with a position angle of PA. Precipitable water vapor in the atmosphere was stable at 0.7 mm.
+
+
+table:
+Line: HCO+, HCN, CO, CS
+Cut:  110,  80,  60, None
 
 
 
