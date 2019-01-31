@@ -1,65 +1,37 @@
 \chapter{Results}
 \label{chap:results}
 
-\section{Modeling}
+
+Spatially and spectrally resolved line emission was detected for CO (3-2), HCO$^{+}$ (4-3), HCN (4-3), and CS (7-6) across around 50 channels of width 0.42 km s$^{-1}$. Here are presented line-emission statistics, as well as moment maps, channel maps, and a discussion on the role of cloud contamination in the data.
+
+
+\bigskip
+
+\section{Cloud Contamination}
 % Ex footnote: \texttt{K2Phot}\footnote{\href{https://github.com/vincentvaneylen/k2photometry}{https://github.com/vincentvaneylen/k2photometry}} \citep{vaneylen2016}
 
+Cloud contamination occurs when emission from gas clouds along the observation's line of sight is detected. This is typically not a significant issue for observations of proplyds in low-mass star forming regions (SFRs), but thanks to the Orion Nebula's significantly higher gas density, cloud contamination presents significant problems in these data, particularly in the CO line, thanks to its low critical density and relatively high abundance in the background clouds. Thanks to higher critical densities and lower abundances, cloud contamination is less significant, but still present, in the other lines. It is crucial to manage and minimize these effects before modeling so that cloud emission does not confuse the modeling algorithms.
 
-Spatially and spectrally resolved line emission was detected for CO (3-2), HCO$^{+}$ (4-3), HCN (4-3), and CS (7-6) across around 50 channels of width 0.42 km s$^{-1}$. Before beginning modeling processes, it is useful to the data as the are. This process includes removing cloud contamination, investigating the general morphology of the disks using moment maps, estimating the disks' gas masses using integrated line flux, and examining the velocity profile to estimate the mass of the central star (really?).
-
-Cloud contamination occurs when emission from background or foreground gas clouds is detected in the same direction as the disk being observed. Since the Orion Nebula has a higher gas density than low-mass SFRs, cloud contamination is more much common and problematic. "Previous observations of these disks by Mann & Williams (2009) (citation) (do I have these?) strongly detected the CO (3-2 line)". Thanks to the higher sensitivity of the ALMA observations, etc.
-
-HCO$^+$ displayed the most significant cloud contamination, thanks to its low critical density and higher abundance in the clouds. For the other molecular lines, which have higher critical densities, cloud contamination is less severe but still clearly present in HCO$^{+}$, which is the brightest tracer.
-
-Since cloud contamination inherently tends to be large-scale in structure, excluding short baselines reduces its contribution to the observations. While this process slightly reduces the total recovered flux from the disk and our ability to characterize its large-scale structure, it is necessary to avoid including cloud emission from the cloud in the process of fitting the disk emission. By evaluating mean and RMS noise for an off-source region of the field while varying the minimum baseline used, we found that excluding baselines less than 110 k$\lambda$, 80 k$\lambda$, and 60  k$\lambda$ for HCO$^{+}$, HCN, and CO, respectively, yielded optimum results. Since the CS line already has a very low SNR and a higher critical density, excluding baselines did not improve the observations.
-
-
-% Maybe put an image of HCO+ before and after the cuts here?
-\begin{figure}
-\centering
-\begin{minipage}{.5\textwidth}
-  \centering
-  \includegraphics[width=.6\linewidth]{hcn-imnoise_hcn10000.png}
-  \captionof{figure}{First moment map of HCO+, with and without (below and above, respectively) baseline cuts.}
-  \label{fig:test1}
-\end{minipage}%
-\begin{minipage}{.5\textwidth}
-  \centering
-  \includegraphics[width=.6\linewidth]{hcn-imnoise_hcn10000.png}
-  \captionof{figure}{First moment map of HCN, with and without (below and above, respectively) baseline cuts.}
-  \label{fig:test2}
-\end{minipage}
-\end{figure}
-
-\iffalse
 \bigskip
+
+Luckily, there exist ways to minimize the effects of cloud contamination. Here we take advantage of the fact that the structure of these contaminating clouds tends to be very large in scale (relative to a proplyd's length scales) and that, in observations made with interferometers like ALMA, one may control not only the smallest angular scales observed but also the largest angular scales observed. This is a feature unique to interferometers; while the designer of an optical telescope may increase their lens diameter to resolve smaller angular scales (analogous, in an interferometer, to increasing their maximum baseline distance), they may not control the largest angular scales resolved, since glass is a continuous substance whose "shortest diameter" cannot be changed (which would be analogous to varying the shortest baseline of an interferometer). Using these two features, we may exclude a selection of the shortest baselines used in our data, effectively shrinking the largest angular scales and, consequently, significantly reducing the effects of the cloud emission. While this process slightly reduces the total recovered flux from the disks and our ability to characterize their large-scale structures, it is a necessary process in order to avoid including cloud emission from the cloud in the process of fitting the disk emission. By evaluating mean and RMS noise for an off-source region of the field while varying the minimum baseline used, we found that excluding baselines less than 110 k$\lambda$, 80 k$\lambda$, and 60  k$\lambda$ for HCO$^{+}$, HCN, and CO, respectively, yielded optimum results. Since emission from the CS line already has a very low SNR and a higher critical density, excluding baselines did not improve the observations. The effects of different cuts is presented in the figure below.
+
+\bigskip
+\bigskip
+
+% Calculations for this are made in scratch_02.py but maybe should be in scratch_03 now.
 \begin{tabular}{l*{6}{c}r}
-  Line                       & HCO$^{+}$ & HCN    & CO    & CS  \\
-  \hline
-  Min Baseline (k$\lambda$)  &  110      & 80     & 60    & 24.23 (None excluded) \\
-  Largest Angular Scale (")  &  1.87     & 2.57   & 3.44  & 8.12 \\
-  Angular Resolution (")     &  0.45     & 0.45  & 0.47   & 0.47 \\
-\end{tabular}
+  \hline\hline \\
 
-\bigskip
-\bigskip
-\fi
-
-
-\bigskip
-\bigskip
-\textbf{probably don't need angular res here}
-\begin{tabular}{l*{6}{c}r}
-  Line       & \shortstack{Baselines \\ (")} & \shortstack{Max Angular Scale \\ (")} & Angular Resolution & \shortstack{Integrated Line Flux \\ (Jy km s$^{-1}$)} \\
+  \shortstack{Molecular \\ Line} & \shortstack{Baselines \\ Included} & \shortstack{Max Angular Scale \\ (")} & \shortstack{Integrated Line Flux [Disk A, Disk B]\\ (Jy km s$^{-1}$)} \\
   \hline
-  \hline
-  CS (7-6)         & All                            & 8."5 & 0."47 \\
-  CO (3-2)         & All                            & 8."4 & 0."47 \\
-  CO (3-2)         & \textgreater 60 k$\lambda$     & 3."4 & 0."47 \\
-  HCN (4-3)        & All                            & 8."2 & 0."45 \\
-  HCN (4-3)        & \textgreater 80 k$\lambda$     & 2."6 & 0."45 \\
-  HCO$^{+}$ (4-3)  & All                            & 8."2 & 0."45 \\
-  HCO$^{+}$ (4-3)  & \textgreater 110 k$\lambda$    & 1."9 & 0."45 \\
+  CS (7-6)         & All                            & 8."5 & [837, 139] $\pm$ 0.07 \\
+  CO (3-2)         & All                            & 8."4 & [837, 139] $\pm$ 0.07 \\
+  CO (3-2)         & \textgreater 60 k$\lambda$     & 3."4 & [837, 139] $\pm$ 0.07 \\
+  HCN (4-3)        & All                            & 8."2 & [837, 139] $\pm$ 0.07 \\
+  HCN (4-3)        & \textgreater 80 k$\lambda$     & 2."6 & [837, 139] $\pm$ 0.07 \\
+  HCO$^{+}$ (4-3)  & All                            & 8."2 & [837, 139] $\pm$ 0.07 \\
+  HCO$^{+}$ (4-3)  & \textgreater 110 k$\lambda$    & 1."9 & [837, 139] $\pm$ 0.07 \\
   \hline
 \end{tabular}
 \caption{Table 1: Integrated Flux Measurements}
@@ -67,60 +39,132 @@ Since cloud contamination inherently tends to be large-scale in structure, exclu
 \bigskip
 
 
+% NOISE PROFILES
 \begin{figure}
+\centering
+\begin{minipage}{.48\textwidth}
   \centering
-  \includegraphics[height=0.8\textheight]{Noise-copmarison-HCO+_mom0.pdf}
-  \caption{blah}
+  \includegraphics[width=\linewidth]{hco-imnoise_hco10000.png}
+  \captionof{figure}{HCO Noise profiles}
+  \label{fig:test1}
+\end{minipage}%
+\begin{minipage}{.48\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{hcn-imnoise_hcn10000.png}
+  \captionof{figure}{HCN Noise profiles}
+  \label{fig:test2}
+\end{minipage}
 \end{figure}
 
-The effects of these exclusions are detailed in Table 1 and demonstrated on the HCO$^{+}$ line in Figure 1. (Analysis of these plots, bottom of p.3 in Factor et al)
+
+\section{Line Data}
+
+Moment maps offer us ways to flatten the three-dimensional data-cube (in $v, \alpha, \delta$) into two dimensions. Moment 0 maps integrate flux along the velocity axis as a function of position, providing insight into structures of emission intensity in the disk's morphology, while moment 1 maps, a velocity-weighted intensity integration across position, describe a source's velocity gradients. Figures \ref{fig:CO_m0} and \ref{fig:CO_m1} show zeroth- and first-moment maps, respectively, of the CO line emission, with and without a 60 k$\lambda$ baseline cut made (left and right, respectively).
+
+% MOMENT MAPS
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{m0-map_co-co.pdf}[h!]
+  \captionof{figure}{Zeroth moment map of CO emission, with and without a cut of all baseline's below 60 k$\lambda$ (left and right, respectively). Colors correspond to velocity-integrated intensity, while contours represent $\pm$3, 5, 7...15-$\sigma$ transitions where 1$\sigma$ is 0.257 Jy beam$^{-1}$ km s$^{-1}$. Negative contours are dashed. The beam is shown in the bottom left corner, with a diameter of 0."5 which corresponds to 200 AU at 389 parsec.}
+  \label{fig:CO_m0}
+  \includegraphics[width=\linewidth]{m1-map_co-co.pdf}
+  \captionof{figure}{First moment map of CO emission, with and without a cut of all baseline's below 60 k$\lambda$ (left and right, respectively). Colors correspond to intensity-weighted LSRK velocity, while contours represent $\pm$3, 5, 7,..., 15-$\sigma$ transitions where 1$\sigma$ is 0.257 Jy beam$^{-1}$ km s$^{-1}$}
+  \label{fig:CO_m1}
+\end{figure}
 
 
-In all lines, rotation of each disk is clearly visible as a transition from red-shifted emission in one corner to blue-shifted emission in the other corner***. The maximum extent of the 3-$\sigma$ contours along the disks' major axes correspond to outer diameters of the HCO+ disks of A and B; outer diameters of the HCN disks of A and B; and outer diameters of the CO disks of A and B, all at a distance of 389pc. The CS emission is not detected strongly enough to provide a reliable measurement (check that this is true)
 
-Tables 2 and 3 present the velocity-integrated line fluxes and the best-fit parameters for a simple elliptical Gaussian fit to the visibilities for each disk, respectively. Integrated line flux was measured using the MIRIAD task cgcurs to integrate the intensity in the zeroth-moment map throughout the region enclosed by the 3 $\sigma$ contour level. Uncertainties in the integrated line flux do not include the 10\% absolute flux calibration uncertainty inherent in the ALMA observations caused by uncertainties int he models of solar system objects used as flux callibrators. Elliptical Gaussian fits of the visibilities were performed using the MIRIAD task uvfit.
+Integrated line flux was measured using the Miriad task \texttt{cgcurs} to spatially integrate flux in a zeroth moment map over the region enclosed by the 3$\sigma$ contour. Unfortunately, results are several orders of magnitude off, so something seems to be wrong.
 
-Assuming optically thin emission (maybe good?) and Local Thermodynamic Equilibrium (LTE), the line-emitting gas mass, M$_{\text{gas}}$ is given by:
+Elliptical Gaussian fits were attempted using both the CASA task \texttt{uvmodelfit} and the Miriad task \texttt{uvfit} before the author woke up enough to realize that something smarter would have to be done to separate the two disks. I think I did this over the summer, so it's just a matter of going back through old notes and remembering what the task was (I think it was an interactive CASA tool.) Additionally, I used the Gaussian fit tool in \texttt{imview} to go for rough fits. The reported extent of Disk A's major axis in the HCO+ line corresponds to an outer diameter of 500 AU; it was getting confused trying to fit for disk B. More work to be done here.
+
+% uvfit vis=data/hco/hco-short110.vis object=gaussian
+
+
+
+\iffalse
+Tables 2 and 3 present the velocity-integrated line fluxes and the best-fit parameters for a simple elliptical Gaussian fit to the visibilities for each disk, respectively. Integrated line flux was measured using the MIRIAD task \texttt{cgcurs} to integrate the intensity in the zeroth-moment map throughout the region enclosed by the 3 $\sigma$ contour level. Uncertainties in the integrated line flux do not include the 10\% absolute flux calibration uncertainty inherent in the ALMA observations caused by uncertainties int he models of solar system objects used as flux callibrators. Elliptical Gaussian fits of the visibilities were performed using the MIRIAD task \texttt{uvfit}.
+\fi
+
+\bigskip
+
+Assuming optically thin emission and Local Thermodynamic Equilibrium (LTE), the line-emitting gas mass, M$_{\text{gas}}$ is given by:
 
 \begin{align}
   M_{\text{gas}}= \frac{4 \pi}{h \nu_0} \frac{F m d^2}{A_{ul} X_u},
+  \label{M_gas}
 \end{align}
 
 where $F$ is the integrated line flux, $m$ is the mass of the emitting gas molecule, $d$ is the distance to the source, $h$ is the Planck constant, $\nu_0$ is the molecular line's rest frequency, $A_{ul}$ is the Einstein coefficient for the ($u - l$) transition, and
 
 \begin{align}
   X_u = \frac{N_u}{N_{\text{tot}}} = (2 J_u + 1) \frac{\exp [-B_0 J_u (J_u + 1) h c/kT_{\text{ex}}]}{kT_{\text{ex}}/hc B_0}.
+  \label{X_u}
 \end{align}
 
-In (2), $\frac{N_u}{N_{\text{tot}}}$ is the ratio of the number of molecules in the upper state to the total number of molecules; $J_u$ is the quantum number of the upper level; $B_0$ is the rotation constant in units of wavenumber; $h$ and $c$ are the Planck constant and speed of light, respectively; and $T_{\text{ex}}$ is the excitation temperature. VALUES FOR A_UL AND B0 WERE TAKEN FROM MOLECULAR DATA MADE AVAILABLE BY SHOIER ET AL 2005. LOTS MORE TO DO HERE.
-
-
-A position-velocity diagram for HCO$^{+}$ is shown in Figure 4, showing the position, as a function of velocity, of emission form a cut along the major axis of the disk (FIGURE OUT HOW TO DO THIS).
-ANALYSIS of this stuff.
+In \ref{X_u}, $\frac{N_u}{N_{\text{tot}}}$ is the ratio of the number of molecules in the upper state to the total number of molecules; $J_u$ is the quantum number of the upper level; $B_0$ is the rotation constant in units of wavenumber; $h$ and $c$ are the Planck constant and speed of light, respectively; and $T_{\text{ex}}$ is the excitation temperature. Values for $A_{ul}$ and $B_0$ were taken from molecular data drawn from \citet{Schoeier_et_al_2005}. Since \ref{M_gas} is the mass of the observed gas species, it must be scaled by the it's relative abundance (fit for in Section 4) to obtain a total mass (\textit{I'm not totally clear on this}). From this, we find a total mass of $0.x \pm 0.y M_{\odot}$.
 
 
 
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{hco_pv_rough}[h!]
+  \captionof{figure}{A bad PV diagram. I've figured out roughly how to do it but am still working out some kinks.}
+  \label{fig:pv_diag}
+\end{figure}
 
-To find best fit values, we use disk modeling and ray-tracing code developed by \citet{flaherty2013}. The code turns a set of paramters describing the disk's physical structure (atmospheric temperature, density structure, molecular abundances, and so on) into a three dimensional model. Given observational characteristics (distance, inclination, and so on), it can then turn that model into a simulated sky-projected image which may then be compared to our observational data.
-
-Explorations of paramter space were implemented through
+A Position-Velocity (PV) diagram is presented in \ref{fig:pv_diag}. The diagram shows the velocity distribution of of emission along a slice along the major axis of one of the disks. Since this is kinda garbage right now, there's not too much to say, but at least it's going somewhere.
 
 
 
+
+
+I'm not sure if there's much to be gained from having channel maps in this section. Sam used them here a little to demonstrate an improvement in cloud contamination from cutting baselines, but I feel like moment maps do that pretty well.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{hco_image.png}[h!]
+  \captionof{figure}{A rough channel map of the HCO+ data. This will get made into a better plotter later. I think it's good to have some channel maps in this section?}
+  \label{fig:CO_m0}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+\iffalse
 Things to get:
 * Rewrite this whole thing.
-* Previous observation of these disks with SMA? Maybe Mann & Williams 2009. What did they detect?
 * Integrated Flux Measurements
-* Make a 2-image subplot of HCO+ with and without baseline cutting. Moment 0 or Moment 1? Show n-sigma contours
-  * Find max width of disks for each line by 3-sigma contour
+* Find max width of disks for each line by 3-sigma contour
 
-* Make moment0 and moment1 plotters. Two panel or just 1? Should have contouring.
-* Use cgcurs to get integrated line flux in moment0 map.
 * use uvfit for elliptical guassian vis fits.
-* PV Diagram
-* Gas mass calculations
 
+\fi
 
+\iffalse
+\begin{figure}
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.99\linewidth]{m0-map_co-co.pdf}
+  \captionof{figure}{First moment map of HCO+, with and without (below and above, respectively) baseline cuts.}
+  \label{fig:test1}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.99\linewidth]{m1-map_co-co.pdf}
+  \captionof{figure}{First moment map of HCN, with and without (below and above, respectively) baseline cuts.}
+  \label{fig:test2}
+\end{minipage}
+\end{figure}
+\fi
 
 
 
