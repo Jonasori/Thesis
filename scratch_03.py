@@ -38,13 +38,11 @@ def miriad_caller(call_str):
 
     return stats
 
-s = miriad_caller(call_str)
-
-s
 
 
+F = float(miriad_caller(call_str)[0][2])
 #  params = [J_u, B0, T_ex, nu0, F, m, d, A_ul]
-# params_hco = [J_u, B0, 17, 356.734288, F, 29.0, 389, 3.6269e-3]
+# params_hco = [4, B0, 17, 356.734288, F, 29.0, 389, 3.6269e-3]
 params_hco = [1, 1, 1, 1, 1, 1, 1, 1]
 
 def get_gas_mass(params):
@@ -56,7 +54,7 @@ def get_gas_mass(params):
         B0 (int): Rotational constant (units of wavenumber)
         T_ex (float): Excitational temperature (K)
         nu0 (float): restfreq (GHz)
-        F (float): integrated line flux
+        F (float): integrated line flux (get from cgcurs)
         m (float): mass of emitting molecule (units?)
         d (float): distance to source
         A_ul (float): Einstein coefficient of u-l transition (Hz)
