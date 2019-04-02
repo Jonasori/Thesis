@@ -8,6 +8,7 @@ Spatially and spectrally resolved line emission was detected for CO (3-2), HCO$^
 \bigskip
 
 \section{Cloud Contamination}
+\label{section:cloud_contamination}
 % Ex footnote: \texttt{K2Phot}\footnote{\href{https://github.com/vincentvaneylen/k2photometry}{https://github.com/vincentvaneylen/k2photometry}} \citep{vaneylen2016}
 
 Cloud contamination occurs when emission from gas clouds along the observation's line of sight is detected. This is typically not a significant issue for observations of proplyds in low-mass star forming regions (SFRs), but thanks to the Orion Nebula's significantly higher gas density, cloud contamination presents significant problems in these data, particularly in the CO line, thanks to its low critical density and relatively high abundance in the background clouds. Thanks to higher critical densities and lower abundances, cloud contamination is less significant, but still present, in the other lines. It is crucial to manage and minimize these effects before modeling so that cloud emission does not confuse the modeling algorithms.
@@ -58,7 +59,11 @@ Luckily, there exist ways to minimize the effects of cloud contamination. Here w
 \end{figure}
 
 
+
+
+
 \section{Line Data}
+\label{section:line_data}
 
 Moment maps offer us ways to flatten the three-dimensional data-cube (in $v, \alpha, \delta$) into two dimensions. Moment 0 maps integrate flux along the velocity axis as a function of position, providing insight into structures of emission intensity in the disk's morphology, while moment 1 maps, a velocity-weighted intensity integration across position, describe a source's velocity gradients. Figures \ref{fig:CO_m0} and \ref{fig:CO_m1} show zeroth- and first-moment maps, respectively, of the CO line emission, with and without a 60 k$\lambda$ baseline cut made (left and right, respectively).
 

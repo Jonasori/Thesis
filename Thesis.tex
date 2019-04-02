@@ -78,7 +78,7 @@
 %-----------------------------------------------------------------------------------------------------------------------------------------
 % RULES
 
-%This has something to do with headers and margins and stuff:
+% This has something to do with headers and margins and stuff:
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 \textwidth 5.750in \textheight=8.50in \headheight 0.0625in \topmargin 0.0in % book strict
 
@@ -166,7 +166,7 @@
 
 
 %You can also put in the following, if you wish:
-%\listoffigures
+\listoffigures
 %\listoftables \pagestyle{empty}
 
 
@@ -194,10 +194,10 @@
 \pagenumbering{arabic}
 
 %\pagestyle{empty}
-%\include{01_Introduction}
-%\include{02_Observations}
+\include{01_Introduction}
+% \include{02_Observations}
 % \include{03_Results}
-\include{04_Analysis}
+% \include{04_Analysis}
 %\include{05_Discussion}
 %\include{06_Conclusion}
 %\appendix
@@ -216,7 +216,7 @@
 %change title spacing once again, for the bibliography:
 \titlespacing*{\chapter}{0pt}{-.75in}{*3}
 
-%Add the bibliograph
+%Add the bibliography
 \addcontentsline{toc}{chapter}{\textbf {Bibliography}}
 
 %The default for BibTex (the bibliography builder in LaTeX) is to not include citations that are in your bibliography file, but that you don't cite anywhere in the paper.  This changes that setting, so that all papers show up in the bibliography, whether or not you referenced them:
