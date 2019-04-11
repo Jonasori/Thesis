@@ -45,13 +45,26 @@ def miriad_caller(call_str):
     return stats
 
 
+# Einstein A (FCO+(4-3) come from: https://home.strw.leidenuniv.nl/~moldata/datafiles/hco+@xpol.dat
+# Using the value listed as the 5-4 trans since the indexing is bad.
+A_43 =  3.6269e-03 # s-1.
+# F = float(miriad_caller(call_str)[0][2])
+F_hco = 4.15 #Jy km/s
+J = 4
+E0_hco = 2.975 * 1e-2 * 1e-1    # cm-1, taken from first non-zero energy in hcoplus.dat, converted to m-1
+E_43 = 29.7491      #cm-1, from https://home.strw.leidenuniv.nl/~moldata/datafiles/hco+@xpol.dat
 
-F = float(miriad_caller(call_str)[0][2])
-J = 1
-E0_hco = 2.975 * 1e-2         # cm/s, taken from first non-zero energy in hcoplus.dat
-B0 = E0_hco/(J * (J+1))       # Need this in units of wavenumber?!
+E_43 = E0_hco/(J * (J+1))       # Need this in units of wavenumber?!
+B = E_43/(hbar*c)
+
+29.7491
+
+nu0 *= 1e9              # GHz -> Hz
+B0 *= 1e-2              # cm/s -> m/s in the E0 term.
+d *= 3.08e16            # parsecs -> m
+
 # params = [J_u, B0 (wavenumber), T_ex (K), nu0 (GHz), F (J/beam km/s), m (molecular mass), d (parsecs), A_ul (Hz)]
-params_hco = [4, B0, 17, 356.734288, F, 29.0, 389, 3.6269e-3]
+params_hco = [4, B, 17, 356.734288, F, 29.0, 389, 3.6269e-3]
 
 def get_gas_mass(params):
     """
@@ -70,9 +83,6 @@ def get_gas_mass(params):
 
     J_u, B0, T_ex, nu0, F, m, d, A_ul = params
     # Straighten out the units (other -> MKS)
-    nu0 *= 1e9              # GHz -> Hz
-    B0 *= 1e-2              # cm/s -> m/s in the E0 term.
-    d *= 3.08e16            # parsecs -> m
 
 
     X_u = (2 * J_u + 1) * np.exp(-B0 * J_u * (J_u + 1) * h * c /(k * T_ex))/(k * T_ex/(h * c * B0))
