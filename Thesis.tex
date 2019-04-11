@@ -5,7 +5,7 @@
 \documentclass[12pt,oneside]{book}
 
 %These are the packages I used.  There's a description of (most of) them below (that Arthur wrote):
-\usepackage{fancyhdr, geometry, graphicx, epstopdf, lscape, setspace, amssymb, amsmath, wasysym, moreverb, titlesec, longtable, multirow, alltt, here, indentfirst, ifthen, rotating, bm, afterpage, gensymb}
+\usepackage{fancyhdr, geometry, graphicx, epstopdf, lscape, setspace, amssymb, amsmath, wasysym, moreverb, titlesec, longtable, multirow, alltt, here, indentfirst, ifthen, rotating, bm, afterpage, gensymb, booktabs, array}
 \usepackage{hyperref,natbib}
 \usepackage[section]{placeins}
 \usepackage[flushleft]{threeparttable}
@@ -195,12 +195,12 @@
 
 %\pagestyle{empty}
 \include{01_Introduction}
-% \include{02_Observations}
-% \include{03_Results}
-% \include{04_Analysis}
-%\include{05_Discussion}
-%\include{06_Conclusion}
-%\appendix
+\include{02_Observations}
+\include{03_Results}
+\include{04_Analysis}
+\include{05_Discussion}
+\include{06_Conclusion}
+\appendix
 %-----------------------------------------------------------------------------------------------------------------------------------------
 %%BIBLIOGRAPHY:
 \fancypagestyle{plain}{%
@@ -224,8 +224,8 @@
 
 %Insert the bibliography (in this case, my file name was also "bibliography" if not, your line would read:\bibliography{my_workscited_filename} or whatever:
 \bibliographystyle{apj}
-\bibliography{References}
-%\printbibliography
+\bibliography{Thesis-References}
+\printbibliography
 
 
 \end{document}
