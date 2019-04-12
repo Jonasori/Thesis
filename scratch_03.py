@@ -57,7 +57,7 @@ hbar = const.hbar.decompose()
 
 # Einstein A (FCO+(4-3) come from: https://home.strw.leidenuniv.nl/~moldata/datafiles/hco+@xpol.dat
 # Using the value listed as the 5-4 trans since the indexing is bad.
-A_43 =  3.6269e-03 * u.s# s-1.
+A_43 =  3.6269e-03 * (1/u.s) # s-1.
 # F = float(miriad_caller(call_str)[0][2])
 F_hco = 4.15 * (u.Jy * u.km/u.s).decompose() #Jy km/s -> 1e-23 kg m s-3
 
@@ -67,8 +67,10 @@ E0_hco = 2.975e-2 * (1/u.cm).decompose()    # cm-1, taken from first non-zero en
 E_43 = 29.7491 * u.cm.decompose()      #cm-1, from https://home.strw.leidenuniv.nl/~moldata/datafiles/hco+@xpol.dat
 
 E_43 = E0_hco/(J * (J+1))       # Need this in units of wavenumber?!
-B_hco43 = E_43/(hbar*c)
+B_hco43 = E_43/(hbar*c) * (1/u.m)
+B
 
+E_43.unit
 
 hbar*c
 
@@ -79,12 +81,13 @@ mol_mass_hco = 29.0 # Molecular weight - should this have units?
 T_ex_hco = 100 * u.K
 
 
-
+h.unit
 
 
 
 # params = [J_u, B0 (wavenumber), T_ex (K), nu0 (GHz), F (J/beam km/s), m (molecular mass), d (parsecs), A_ul (Hz)]
 params = [J_hco, B_hco43.value, T_ex_hco.value, nu0.value, F_hco.value, mol_mass_hco, d.value, A_43.value]
+params = [J_hco, B_hco43, T_ex_hco, nu0, F_hco, mol_mass_hco, d, A_43]
 
 def get_gas_mass(params):
     """
@@ -104,13 +107,13 @@ def get_gas_mass(params):
     # Straighten out the units (other -> MKS)
 
 
-    B0
+    k.unit
 
 
-    Xu_exp = -B0 * J_u * (J_u + 1) * h * c /(k * T_ex)
+    Xu_exp = (-B0 * J_u * (J_u + 1) * h * c).unit /(k * T_ex)
     Xu_coeff = (2 * J_u + 1) / (k * T_ex/(h * c * B0))
 
-    np.exp(-10)
+    Xu_exp
 
     Xu = Xu_coeff * np.exp(Xu_exp)
 
@@ -121,6 +124,18 @@ def get_gas_mass(params):
 
 m = get_gas_mass(params_hco)
 print m
+
+
+
+def get_stellar_mass():
+    spt_A = 'G2'
+    spt_B = 'M2'
+
+    T_eff_A = 5770 # From hw2 data
+
+
+
+
 
 
 
