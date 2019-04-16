@@ -57,7 +57,8 @@
 \newcommand{\na}{{\it NA}}
 \newcommand{\actaa}{{\it ACA}}
 \newcommand{\apss}{{\it Ap\&SS}}
-\newcommand{\kms}{{km s$^{-1}~$}}
+
+\newcommand{\kms}{{km s$^{-1}~$ }}
 
 
 \def\chapterautorefname{Chapter}%
@@ -129,7 +130,7 @@
 
 \vspace*{0.8in}
 %{\LARGE \singlespacing \bf Big Disk Energy} \\
-{\LARGE \singlespacing \bf A Clever Title} \\
+{\LARGE \singlespacing \bf Exploring the Role of Environment in the Composition of ONC Proplyds} \\
 \vspace*{0.05in}
 \vspace*{0.10in}
 {\large \vspace*{0.20in}  \singlespacing by \vspace*{.2in}
@@ -196,12 +197,12 @@
 \pagenumbering{arabic}
 
 %\pagestyle{empty}
-\include{01_Introduction}
-\include{02_Observations}
-\include{03_Results}
+% \include{01_Introduction}
+% \include{02_Observations}
+% \include{03_Results}
 \include{04_Analysis}
 \include{05_Discussion}
-\include{06_Conclusion}
+% \include{06_Conclusion}
 \appendix
 %-----------------------------------------------------------------------------------------------------------------------------------------
 %%BIBLIOGRAPHY:
@@ -215,16 +216,16 @@
 \renewcommand{\footrulewidth}{0pt}}
 \pagestyle{plain}
 
-%change title spacing once again, for the bibliography:
+% change title spacing once again, for the bibliography:
 \titlespacing*{\chapter}{0pt}{-.75in}{*3}
 
-%Add the bibliography
+% Add the bibliography
 \addcontentsline{toc}{chapter}{\textbf {Bibliography}}
 
-%The default for BibTex (the bibliography builder in LaTeX) is to not include citations that are in your bibliography file, but that you don't cite anywhere in the paper.  This changes that setting, so that all papers show up in the bibliography, whether or not you referenced them:
+% The default for BibTex (the bibliography builder in LaTeX) is to not include citations that are in your bibliography file, but that you don't cite anywhere in the paper.  This changes that setting, so that all papers show up in the bibliography, whether or not you referenced them:
 \nocite{*}
 
-%Insert the bibliography (in this case, my file name was also "bibliography" if not, your line would read:\bibliography{my_workscited_filename} or whatever:
+% Insert the bibliography (in this case, my file name was also "bibliography" if not, your line would read:\bibliography{my_workscited_filename} or whatever:
 \bibliographystyle{apj}
 \bibliography{Thesis-References}
 \printbibliography
