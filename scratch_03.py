@@ -63,16 +63,17 @@ F_hco = 4.15 * (u.Jy * u.km/u.s).decompose() #Jy km/s -> 1e-23 kg m s-3
 
 
 J_hco = 4.
-E0_hco = 2.975e-2 * (1/u.cm).decompose()    # cm-1, taken from first non-zero energy in hcoplus.dat, converted to m-1
 E_43 = 29.7491 * u.cm.decompose()      #cm-1, from https://home.strw.leidenuniv.nl/~moldata/datafiles/hco+@xpol.dat
 
-E_43 = E0_hco/(J * (J+1))       # Need this in units of wavenumber?!
-B_hco43 = E_43/(hbar*c) * (1/u.m)
-B
+E0_hco = 2.975e-2 * (1/u.cm).decompose()    # cm-1, taken from first non-zero energy in hcoplus.dat, converted to m-1
+B0_hco = 2*np.pi*E0_hco
 
-E_43.unit
+E43_hco = E0_hco/(J_hco * (J_hco+1))
+B_hco43 = 2*np.pi*E43_hco # From wiki: k = E/(hbar c = hc/2pi) -> k (hc) = 2pi E
 
-hbar*c
+B0
+
+
 
 
 d = 389 * u.pc.decompose()  # pc -> m
@@ -86,8 +87,8 @@ h.unit
 
 
 # params = [J_u, B0 (wavenumber), T_ex (K), nu0 (GHz), F (J/beam km/s), m (molecular mass), d (parsecs), A_ul (Hz)]
-params = [J_hco, B_hco43.value, T_ex_hco.value, nu0.value, F_hco.value, mol_mass_hco, d.value, A_43.value]
-params = [J_hco, B_hco43, T_ex_hco, nu0, F_hco, mol_mass_hco, d, A_43]
+params = [J_hco, B0_hco.value, T_ex_hco.value, nu0.value, F_hco.value, mol_mass_hco, d.value, A_43.value]
+params = [J_hco, B0_hco, T_ex_hco, nu0, F_hco, mol_mass_hco, d, A_43]
 
 def get_gas_mass(params):
     """
@@ -107,11 +108,9 @@ def get_gas_mass(params):
     # Straighten out the units (other -> MKS)
 
 
-    k.unit
-
-
-    Xu_exp = (-B0 * J_u * (J_u + 1) * h * c).unit /(k * T_ex)
-    Xu_coeff = (2 * J_u + 1) / (k * T_ex/(h * c * B0))
+    # This is cheating - the units aren't dead yet.
+    Xu_exp = ((-B0 * J_u * (J_u + 1) * h * c).unit /(k * T_ex)).value
+    Xu_coeff = ((2 * J_u + 1) / (k * T_ex/(h * c * B0)))
 
     Xu_exp
 
@@ -122,8 +121,11 @@ def get_gas_mass(params):
     m_gas /= 1.9891e30 # Put it in solar masses.
     return m_gas
 
-m = get_gas_mass(params_hco)
+m = get_gas_mass(params)
 print m
+
+m
+
 
 
 
