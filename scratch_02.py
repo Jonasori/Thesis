@@ -87,11 +87,34 @@ for d in [hco_dict, hcn_dict, co_dict, cs_dict]:
 
 
 
+v = None
+
+
+
+def calc_sigma(vector=None):
+    import numpy as np
+    if vector:
+        val1, sig1, val2, sig2 = vector
+    else:
+        val1 = input('Value of Param 1:\n')
+        sig1 = input('Value of sigma 1:\n')
+        val2 = input('Value of Param 2:\n')
+        sig2 = input('Value of sigma 2:\n')
+
+    diff =  abs(val1 - val2)/(np.sqrt(sig1**2 + sig2**2))
+    print (diff)
+    return diff
 
 
 
 
+mass_jonasA_sam = calc_sigma([78.66, 0.42, 45.84, 0.77])
+radii_jonasA_ritaA = calc_sigma([268, 26.8, 340.77, 8])
+radii_sam_rita = calc_sigma([525, 52.5, 530, 10])
+
+
+radii_jonasA_ritaA
 
 
 
-# casa immoments
+# The End
