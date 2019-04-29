@@ -71,7 +71,6 @@ B0_hco = 2*np.pi*E0_hco
 E43_hco = E0_hco/(J_hco * (J_hco+1))
 B_hco43 = 2*np.pi*E43_hco # From wiki: k = E/(hbar c = hc/2pi) -> k (hc) = 2pi E
 
-B0
 
 
 
@@ -79,7 +78,7 @@ B0
 d = 389 * u.pc.decompose()  # pc -> m
 nu0 = 356.734288 * u.GHz.decompose()
 mol_mass_hco = 29.0 # Molecular weight - should this have units?
-T_ex_hco = 100 * u.K
+T_ex_hco = 17 * u.K # From Sam
 
 
 h.unit
