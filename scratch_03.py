@@ -46,6 +46,7 @@ def get_fluxed():
 
         return stats
 
+print(rms)
 
 get_fluxed()
 
