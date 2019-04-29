@@ -113,7 +113,14 @@ radii_jonasA_ritaA = calc_sigma([268, 26.8, 340.77, 8])
 radii_sam_rita = calc_sigma([525, 52.5, 530, 10])
 
 
-radii_jonasA_ritaA
+'''
+V2434 Ori: 05 35 25.23 -05 15 35.69
+Distance to Theta Ori C
+Theta Ori C: 05 35 31.43 -05 25 16.36
+sqrt(6.2^2 + (10*60 -9)^2)
+Nu Ori: 05 35 31.36	-05 16 02.58
+sqrt(6.1^2 + (1*60 -32)^2) = 11147au = 0.05pc
+'''
 
 
 

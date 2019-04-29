@@ -24,7 +24,7 @@ def get_fluxed():
     os.chdir('/Volumes/disks/jonas/modeling')
     from tools import imstat_single
 
-    im = 'hco_moment0'
+    im = 'data/hco/hco-short110_moment0'
     rms = imstat_single(im)[1]
     call_str = "cgcurs in={},{} device=/xs type=both slev=a,{} levs=2,7,15 options=stats".format(im + '.cm', im + '.cm', rms)
     def miriad_caller(call_str):
@@ -47,7 +47,7 @@ def get_fluxed():
         return stats
 
 
-
+get_fluxed()
 
 h = const.h.decompose()
 c = const.c.decompose()
@@ -59,7 +59,6 @@ hbar = const.hbar.decompose()
 # Using the value listed as the 5-4 trans since the indexing is bad.
 A_43 =  3.6269e-03 * (1/u.s) # s-1.
 # F = float(miriad_caller(call_str)[0][2])
-F_hco = 4.15 * (u.Jy * u.km/u.s).decompose() #Jy km/s -> 1e-23 kg m s-3
 
 
 J_hco = 4.
@@ -71,18 +70,15 @@ B0_hco = 2*np.pi*E0_hco
 E43_hco = E0_hco/(J_hco * (J_hco+1))
 B_hco43 = 2*np.pi*E43_hco # From wiki: k = E/(hbar c = hc/2pi) -> k (hc) = 2pi E
 
-
-
-
-
 d = 389 * u.pc.decompose()  # pc -> m
 nu0 = 356.734288 * u.GHz.decompose()
 mol_mass_hco = 29.0 # Molecular weight - should this have units?
 T_ex_hco = 17 * u.K # From Sam
 
+F_hco_jy = 4.15 * u.Jy * u.km * u.s**(-1)  #Jy km/s
+F_hco = (F_hco_jy * nu0/c * 1e5).decompose()
 
-h.unit
-
+F_hco.decompose()
 
 
 # params = [J_u, B0 (wavenumber), T_ex (K), nu0 (GHz), F (J/beam km/s), m (molecular mass), d (parsecs), A_ul (Hz)]
@@ -108,22 +104,23 @@ def get_gas_mass(params):
 
 
     # This is cheating - the units aren't dead yet.
-    Xu_exp = ((-B0 * J_u * (J_u + 1) * h * c).unit /(k * T_ex)).value
+    Xu_exp = ((-B0 * J_u * (J_u + 1) * h * c) /(k * T_ex))
     Xu_coeff = ((2 * J_u + 1) / (k * T_ex/(h * c * B0)))
 
     Xu_exp
 
+    Xu_coeff
+
     Xu = Xu_coeff * np.exp(Xu_exp)
 
-
-    m_gas = (4 * np.pi/(h * nu0) ) * (F * m * d**2 / (A_ul * Xu))
+    m_gas = (4 * np.pi/(h.decompose().value * nu0.decompose().value) ) * (F.decompose().value * m * d.decompose().value**2 / (A_ul.decompose().value * Xu))
     m_gas /= 1.9891e30 # Put it in solar masses.
     return m_gas
 
 m = get_gas_mass(params)
 print m
 
-m
+m_gas
 
 
 
