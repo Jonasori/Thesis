@@ -86,12 +86,14 @@ def get_mass():
     # Disk-specifics
     F = 6.8 * 1e-12 # erg cm-2 s-1 Hz-1 Hz
     Aul = 3.63 * 1e-3 # Hz
-    B0 = 2 * np.pi * 0.0297 #29.75
+    B0 = 2 * np.pi * 0.0297 # 29.75
+    # REWORK Check with jessica for this
     T = 17 # K
     d = 389 * 3.086e+18 # cm
 
     # Line-specifics
-    m = 29 / (6 * 1e23) # g
+    proton_mass = 1.67e-24 # g, from http://www.astro.wisc.edu/~dolan/constants.html
+    m = 29. * proton_mass  #g
     nu0 = 356.73 * 1e9 # Hz
     J = 4
 
@@ -167,6 +169,19 @@ def new_get_mass():
 
 
 new_get_mass()
+
+
+def list_to_latex(s):
+    l = list(filter(None, s.split(" ")))
+    s = '$ ' + l[0] + '_{' + l[1] + '}^{+' + l[2] + '}$  & $' + l[3]
+    return s
+
+
+list_to_latex('129 -14  12   126')
+
+
+
+
 
 
 

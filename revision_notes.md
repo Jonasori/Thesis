@@ -6,23 +6,23 @@
   - M(E43 = 29) = 2e129 M_sol
   - Did I do/interpret mol mass right?
 
+* Spell detex filename.tex is a linux spellchecker
 
-- Lots of missing Notes
 
 - Getting rid of the DFM corner plots anyways. Useful to have 0? 1?
+  * One set of corner plots (probably HCO)
 
 - Should every instance of HCO/HCN etc have transition? i.e. HCO(4-3) always.
+  * put it in "where it matters" i.e. ratios etc
+  * only don't include if it doesn't matter
 
 - Forgetting spaces after HCO+: because of set command
+  * See line 74 in Thesis.tex
 
 - Sig fig rules
-
-- Sharp-eyes meredith on spotting the badness of the last frame of DMR chanmaps
-
-- Structure plots: Wow, thank you! But also why do they look weird?
-
-- What should the captions have? (again)
-
+  * Only report one digit of uncertainty in, rounding extras, then report on that one
+  * If uncertainty starts with 1: then include one extra digit (i.e. 1.81 - > 1.8, report value out to tenths)
+  * In case of 95.8 -> 100.0, 166 -> 170 (bc ones)
 
 
 ### Meredith Notes:
@@ -46,8 +46,6 @@
 
 
 - Fig 4.4: Take off disk A's fit (maybe?); at least change its color.
-
-
 
 
 ### TO DO

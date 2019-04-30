@@ -71,7 +71,9 @@
 % \newcommand{\jwst}{\textit{JWST~}}
 % \newcommand{\spitzer}{\textit{Spitzer~}}
 % \newcommand{\gaia}{\textit{Gaia~}}
-\newcommand{\hco}{HCO$^+$ }
+
+% REWORK: Took out space from \hco. If spaces are not being added, add a tilde to force one
+\newcommand{\hco}{HCO$^+$}
 \newcommand{\kms}{km\,s$^{-1}$ }
 %\newcommand{\kms}{{km s$^{-1}~$ }}
 
@@ -196,12 +198,12 @@
 \pagenumbering{arabic}
 
 %\pagestyle{empty}
-% \include{01_Introduction}
-% \include{02_Observations}
-% \include{03_Results}
+\include{01_Introduction}
+\include{02_Observations}
+\include{03_Results}
 \include{04_Analysis}
-% \include{05_Discussion}
-% \include{06_Conclusion}
+\include{05_Discussion}
+\include{06_Conclusion}
 \appendix
 %-----------------------------------------------------------------------------------------------------------------------------------------
 %%BIBLIOGRAPHY:
@@ -225,9 +227,9 @@
 \nocite{*}
 
 % Insert the bibliography (in this case, my file name was also "bibliography" if not, your line would read:\bibliography{my_workscited_filename} or whatever:
-\bibliographystyle{apj}
-\bibliography{Thesis-References}
-%\printbibliography
+% \bibliographystyle{apj}
+% \bibliography{Thesis-References}
+% \printbibliography
 
 
 \end{document}
