@@ -1,6 +1,5 @@
 ### MEREDITH TALKING POINTS
 
-- Mass calculation in 03. Go over it in code until the numbers work
 
 - Questions about B0 in scratch_03.py/get_mass.
   - M(E0 = 0.029) = 7.4e-6 Msol
@@ -8,15 +7,32 @@
   - Did I do/interpret mol mass right?
 
 
+- Lots of missing Notes
+
+- Getting rid of the DFM corner plots anyways. Useful to have 0? 1?
+
+- Should every instance of HCO/HCN etc have transition? i.e. HCO(4-3) always.
+
+- Forgetting spaces after HCO+: because of set command
+
+- Sig fig rules
+
+- Sharp-eyes meredith on spotting the badness of the last frame of DMR chanmaps
+
+- Structure plots: Wow, thank you! But also why do they look weird?
+
+- What should the captions have? (again)
+
 
 
 ### Meredith Notes:
 
+- 2nd note in 04
+
+
 - in 4.CO_fit, explain why the bad values are probably caused by trying to fit cloud contamination.
 
 - Check Cleeves2015 for line strength ratios
-
-believe
 
 - Dartois on vertical
 
@@ -39,7 +55,9 @@ believe
 - Conclusion!
 - Discussion!
 
-
+- Disk structure plots
+- Sort out units on PVD
+- Get rid of DFM corner plot right before 4.3 Fitting Procedure
 
 
 
@@ -53,8 +71,7 @@ believe
 
 - Switch all HCN/CO/CS to \hcn, etc. Allows easier toggling of HCN or HCN(4-3), depending on what Meredith wants.
 
-- Acknowledgements! Don't forget them.
-
+- Zeroth or zeroeth?
 
 
 # Far future/never:
