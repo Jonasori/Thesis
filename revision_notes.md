@@ -27,11 +27,6 @@
 
 ### Meredith Notes:
 
-- 2nd note in 04
-
-
-- in 4.CO_fit, explain why the bad values are probably caused by trying to fit cloud contamination.
-
 - Check Cleeves2015 for line strength ratios
 
 - Dartois on vertical
@@ -66,8 +61,6 @@
 - AU -> au
 
 - All .tex files: $^o$ -> \degree (works in Table 4.3)
-
-- Switch all HCN/CO/CS to \hcn, etc. Allows easier toggling of HCN or HCN(4-3), depending on what Meredith wants.
 
 - Zeroth or zeroeth?
 
