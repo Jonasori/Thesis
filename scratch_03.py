@@ -140,24 +140,26 @@ def get_stellar_mass():
 
 
 
-
+B0
 
 
 nu0 = 356.73 * 1e9 # Hz
 F = 7.13 * 1e-12 # erg cm-2 s-1 Hz-1 Hz
-d = 3e18 # cm
-m = 29 / (6 * 1e23) # g
+# F = 12 * 1e-12 # erg cm-2 s-1 Hz-1 Hz
+d = 389 * 3e18 # cm
+proton_mass = 1.67e-24 # g, from http://www.astro.wisc.edu/~dolan/constants.html
+m = 29. * proton_mass  #g
 h = 6.626 * 1e-27 # erg s
 Aul = 3.63 * 1e-3 # Hz
 J = 4
 T = 17 # K
-B0 = 2 * np.pi * 0.0297
+B0 = 1.488 # cm-1
 c = 3e10 # cm/s
 k = 1.38 * 1e-16 # erg/K
 
 g2mearth = 5.92 * 1e27 # g/Mearth
-
-def new_get_mass():
+g2msol = 1.985 * 1e33  # g/Msol
+def get_mass():
     Xu_exp = ((-B0 * J * (J + 1) * h * c) /(k * T))
     Xu_coeff = ((2 * J + 1) / (k * T/(h * c * B0)))
 
@@ -165,10 +167,11 @@ def new_get_mass():
 
     m_gas = (4 * np.pi/(h * nu0) ) * (F * m * d**2 / (Aul * Xu))
     m_gas_mearth = m_gas/g2mearth
-    return m_gas_mearth
+    m_gas_msol = m_gas/g2msol
+    return m_gas_msol
 
 
-new_get_mass()
+get_mass()
 
 
 def list_to_latex(s):
@@ -177,7 +180,7 @@ def list_to_latex(s):
     return s
 
 
-list_to_latex('129 -14  12   126')
+list_to_latex('134 -17  17   134')
 
 
 
