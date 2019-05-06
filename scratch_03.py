@@ -61,34 +61,41 @@ hbar = const.hbar.decompose()
 def get_mass():
     """
     Calculate gas mass of a disk from its flux in cgs.
+        Sources:
+            - F: Convert cgcurs output (6.x) from Jy km/s by multiplying by
+                    [1e-23 erg/(cm2 s Hz) Hz][nu0/(c km/s) * 1e5 (cm s-1/km s-1)] (nu0/c)
+            - A_ul: Einstein A, HCO+(4-3) (listed as 5-4 trans bc indexing is bad)
+                    https://home.strw.leidenuniv.nl/~moldata/datafiles/hco+@xpol.dat
+            - T: Excitation temperature from Factor et al (2017)
+            - B0: From wiki: B = k = E/(hbar c = hc/2pi) -> k (hc) = 2pi E
+                - Unclear whether this should use E = (E0 = 0.0297) or E = (E_43 = 29.75) cm-1
+                    - Both from hcoplus.dat and
+                    https://home.strw.leidenuniv.nl/~moldata/datafiles/hco+@xpol.dat
+            - m: molecular weight (g/mol), divided by Avagadro -> g
+                - weight: 29, from https://home.strw.leidenuniv.nl/~moldata/datafiles/hco+@xpol.dat
 
-    Sources:
-        - F: Convert cgcurs output (6.x) from Jy km/s by multiplying by
-                [1e-23 erg/(cm2 s Hz) Hz][nu0/(c km/s) * 1e5 (cm s-1/km s-1)]
-        - A_ul: Einstein A, HCO+(4-3) (listed as 5-4 trans bc indexing is bad)
-                https://home.strw.leidenuniv.nl/~moldata/datafiles/hco+@xpol.dat
-        - T: Excitation temperature from Factor et al (2017)
-        - B0: From wiki: B = k = E/(hbar c = hc/2pi) -> k (hc) = 2pi E
-            - Unclear whether this should use E = (E0 = 0.0297) or E = (E_43 = 29.75) cm-1
-                - Both from hcoplus.dat and
-                https://home.strw.leidenuniv.nl/~moldata/datafiles/hco+@xpol.dat
-        - m: molecular weight (g/mol), divided by Avagadro -> g
-            - weight: 29, from https://home.strw.leidenuniv.nl/~moldata/datafiles/hco+@xpol.dat
 
-
-    Questions:
-        - B0: Using E0 vs. E43. Mostly concerned about this.
-        - Seems like Xu should be unitless, but
-            a) it's not
-            b) it cancels with the leftovers from the rest of the eq (Hz/Hz)
+        Questions:
+            - B0: Using E0 vs. E43. Mostly concerned about this.
+            - Seems like Xu should be unitless, but
+                a) it's not
+                b) it cancels with the leftovers from the rest of the eq (Hz/Hz)
     """
 
+
+    # Constants
+    h = 6.626 * 1e-27 # erg s
+    c = 3e10 # cm/s
+    k = 1.38 * 1e-16 # erg/K
+    g2mearth = 5.92 * 1e27 # g/mEarth
+    g2msol = 2 * 1e33   # g/mSol
+
     # Disk-specifics
-    F = 6.8 * 1e-12 # erg cm-2 s-1 Hz-1 Hz
     Aul = 3.63 * 1e-3 # Hz
     B0 = 2 * np.pi * 0.0297 # 29.75
-    # REWORK Check with jessica for this
+    B0 = 1.488  # cm s-1
     T = 17 # K
+    # T = 32 # K
     d = 389 * 3.086e+18 # cm
 
     # Line-specifics
@@ -97,11 +104,10 @@ def get_mass():
     nu0 = 356.73 * 1e9 # Hz
     J = 4
 
-    # Constants
-    h = 6.626 * 1e-27 # erg s
-    c = 3e10 # cm/s
-    k = 1.38 * 1e-16 # erg/K
-    g2mearth = 5.92 * 1e27 # g/Mearth
+    F_integrated = 4.13 # Jy km s-1
+    F = F_integrated * (10**-23) * (1e5) * (nu0/c) # erg cm-2 s-1 Hz-1 Hz
+    # F = 6.8 * 1e-12 # erg cm-2 s-1 Hz-1 Hz
+
 
 
 
@@ -114,64 +120,28 @@ def get_mass():
     m_gas = (4 * np.pi/(h * nu0) ) * (F * m * d**2 / (Aul * Xu))
     # m_gas /= 1e-8   # Scale by X_hco to get total mass
     m_gas_mearth = m_gas/g2mearth
-    return m_gas_mearth
-
-
-get_mass()
-
-
-
-
-def get_stellar_mass():
-    spt_A = 'G2'
-    spt_B = 'M2'
-
-    T_eff_A = 5770 # From hw2 data
-
-
-
-
-
-
-
-
-
-
-
-
-
-B0
-
-
-nu0 = 356.73 * 1e9 # Hz
-F = 7.13 * 1e-12 # erg cm-2 s-1 Hz-1 Hz
-# F = 12 * 1e-12 # erg cm-2 s-1 Hz-1 Hz
-d = 389 * 3e18 # cm
-proton_mass = 1.67e-24 # g, from http://www.astro.wisc.edu/~dolan/constants.html
-m = 29. * proton_mass  #g
-h = 6.626 * 1e-27 # erg s
-Aul = 3.63 * 1e-3 # Hz
-J = 4
-T = 17 # K
-B0 = 1.488 # cm-1
-c = 3e10 # cm/s
-k = 1.38 * 1e-16 # erg/K
-
-g2mearth = 5.92 * 1e27 # g/Mearth
-g2msol = 1.985 * 1e33  # g/Msol
-def get_mass():
-    Xu_exp = ((-B0 * J * (J + 1) * h * c) /(k * T))
-    Xu_coeff = ((2 * J + 1) / (k * T/(h * c * B0)))
-
-    Xu = Xu_coeff * np.exp(Xu_exp)
-
-    m_gas = (4 * np.pi/(h * nu0) ) * (F * m * d**2 / (Aul * Xu))
-    m_gas_mearth = m_gas/g2mearth
     m_gas_msol = m_gas/g2msol
-    return m_gas_msol
+
+    m_gas_msol
+    m_gas_mearth
+
+    print("M (mSol): ", m_gas_msol)
+    print("M (mEarth): ", m_gas_mearth)
+    print("Using X_HCO = 1e-8.4, inferred total disk mass (mSol): ", m_gas_msol * 10**(8.4))
+    # return m_gas_msol
 
 
 get_mass()
+
+
+
+
+
+
+
+
+
+
 
 
 def list_to_latex(s):
