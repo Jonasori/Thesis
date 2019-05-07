@@ -94,7 +94,7 @@ def get_mass():
     Aul = 3.63 * 1e-3 # Hz
     B0 = 2 * np.pi * 0.0297 # 29.75
     B0 = 1.488  # cm s-1
-    T = 17 # K
+    T = 27 # K
     # T = 32 # K
     d = 389 * 3.086e+18 # cm
 
@@ -127,7 +127,7 @@ def get_mass():
 
     print("M (mSol): ", m_gas_msol)
     print("M (mEarth): ", m_gas_mearth)
-    print("Using X_HCO = 1e-8.4, inferred total disk mass (mSol): ", m_gas_msol * 10**(8.4))
+    print("Using X_HCO = 1e-8, inferred total disk mass (mSol): ", m_gas_msol * 10**(8.5))
     # return m_gas_msol
 
 
