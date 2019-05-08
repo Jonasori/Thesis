@@ -8,12 +8,13 @@ import astropy.constants as const
 from pathlib2 import Path
 
 
-# All MKS
-# h = const.h.value
-# c = const.c.value
-# k = const.k_B.value
-# hbar = const.hbar.value
-
+# Constants
+h = 6.626 * 1e-27 # erg s
+c = 3e10 # cm/s
+k = 1.38 * 1e-16 # erg/K
+g2mearth = 5.92 * 1e27 # g/mEarth
+g2mjup = 1.898 * 1e30 # g/mEarth
+g2msol = 2 * 1e33   # g/mSol
 
 Path.cwd()
 
@@ -61,34 +62,19 @@ hbar = const.hbar.decompose()
 def get_mass():
     """
     Calculate gas mass of a disk from its flux in cgs.
-        Sources:
-            - F: Convert cgcurs output (6.x) from Jy km/s by multiplying by
-                    [1e-23 erg/(cm2 s Hz) Hz][nu0/(c km/s) * 1e5 (cm s-1/km s-1)] (nu0/c)
-            - A_ul: Einstein A, HCO+(4-3) (listed as 5-4 trans bc indexing is bad)
-                    https://home.strw.leidenuniv.nl/~moldata/datafiles/hco+@xpol.dat
-            - T: Excitation temperature from Factor et al (2017)
-            - B0: From wiki: B = k = E/(hbar c = hc/2pi) -> k (hc) = 2pi E
-                - Unclear whether this should use E = (E0 = 0.0297) or E = (E_43 = 29.75) cm-1
-                    - Both from hcoplus.dat and
-                    https://home.strw.leidenuniv.nl/~moldata/datafiles/hco+@xpol.dat
-            - m: molecular weight (g/mol), divided by Avagadro -> g
-                - weight: 29, from https://home.strw.leidenuniv.nl/~moldata/datafiles/hco+@xpol.dat
-
-
-        Questions:
-            - B0: Using E0 vs. E43. Mostly concerned about this.
-            - Seems like Xu should be unitless, but
-                a) it's not
-                b) it cancels with the leftovers from the rest of the eq (Hz/Hz)
-    """
-
-
-    # Constants
-    h = 6.626 * 1e-27 # erg s
-    c = 3e10 # cm/s
-    k = 1.38 * 1e-16 # erg/K
-    g2mearth = 5.92 * 1e27 # g/mEarth
-    g2msol = 2 * 1e33   # g/mSol
+            Sources:
+                - F: Convert cgcurs output (6.x) from Jy km/s by multiplying by
+                        [1e-23 erg/(cm2 s Hz) Hz][nu0/(c km/s) * 1e5 (cm s-1/km s-1)] (nu0/c)
+                - A_ul: Einstein A, HCO+(4-3) (listed as 5-4 trans bc indexing is bad)
+                        https://home.strw.leidenuniv.nl/~moldata/datafiles/hco+@xpol.dat
+                - T: Excitation temperature from Factor et al (2017)
+                - B0: From wiki: B = k = E/(hbar c = hc/2pi) -> k (hc) = 2pi E
+                    - Unclear whether this should use E = (E0 = 0.0297) or E = (E_43 = 29.75) cm-1
+                        - Both from hcoplus.dat and
+                        https://home.strw.leidenuniv.nl/~moldata/datafiles/hco+@xpol.dat
+                - m: molecular weight (g/mol), divided by Avagadro -> g
+                    - weight: 29, from https://home.strw.leidenuniv.nl/~moldata/datafiles/hco+@xpol.dat
+        """
 
     # Disk-specifics
     Aul = 3.63 * 1e-3 # Hz
@@ -106,10 +92,6 @@ def get_mass():
 
     F_integrated = 4.13 # Jy km s-1
     F = F_integrated * (10**-23) * (1e5) * (nu0/c) # erg cm-2 s-1 Hz-1 Hz
-    # F = 6.8 * 1e-12 # erg cm-2 s-1 Hz-1 Hz
-
-
-
 
 
     Xu_exp = ((-B0 * J * (J + 1) * h * c) /(k * T))
@@ -120,23 +102,27 @@ def get_mass():
     m_gas = (4 * np.pi/(h * nu0) ) * (F * m * d**2 / (Aul * Xu))
     # m_gas /= 1e-8   # Scale by X_hco to get total mass
     m_gas_mearth = m_gas/g2mearth
+    m_gas_mjup = m_gas/g2mjup
     m_gas_msol = m_gas/g2msol
 
     m_gas_msol
     m_gas_mearth
 
     print("M (mSol): ", m_gas_msol)
+    print("M (mJup): ", m_gas_mjup)
     print("M (mEarth): ", m_gas_mearth)
-    print("Using X_HCO = 1e-8, inferred total disk mass (mSol): ", m_gas_msol * 10**(8.5))
+    print("Using X_HCO = 1e-8.2, inferred total disk mass (mSol): ", m_gas_msol /(2 * 10**(-10)))
     # return m_gas_msol
 
 
 get_mass()
 
+m_williams = 0.072
+
+1.7187e-11 / m_williams
 
 
-
-
+1.81e-8/(10**(-8.2))
 
 
 
